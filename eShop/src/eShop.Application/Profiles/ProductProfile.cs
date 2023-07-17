@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using eShop.Infrastructure.Products.Requests;
-using eShop.Infrastructure.Products.Responses;
+using eShop.Application.Products.Requests;
+using eShop.Application.Products.Responses;
 using eShop.Domain.Entities;
 
-namespace eShop.Infrastructure.Profiles;
+namespace eShop.Application.Profiles;
 
 public class ProductProfile : Profile
 {

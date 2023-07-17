@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eShop.Application;
 
@@ -10,9 +11,11 @@ using eShop.Application;
 namespace eShop.Application.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230717075302_AddRelationships")]
+    partial class AddRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,18 +100,13 @@ namespace eShop.Application.Migrations
             modelBuilder.Entity("eShop.Domain.Entities.Product", b =>
                 {
                     b.HasOne("eShop.Domain.Entities.PriceCurrency", "PriceCurrency")
-                        .WithMany("Products")
+                        .WithMany()
                         .HasForeignKey("PriceCurrencyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("fk_products_price_currency_price_currency_id");
 
                     b.Navigation("PriceCurrency");
-                });
-
-            modelBuilder.Entity("eShop.Domain.Entities.PriceCurrency", b =>
-                {
-                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

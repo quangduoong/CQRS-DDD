@@ -1,8 +1,8 @@
-﻿using eShop.Infrastructure.Abstractions;
-using eShop.Infrastructure.Middleware;
-using eShop.Infrastructure.Repositories;
+﻿using eShop.Application.Abstractions;
+using eShop.Application.Middleware;
+using eShop.Application.Repositories;
 
-namespace eShop.Infrastructure.Configurations
+namespace eShop.Application.Configurations
 {
     public static class MyServiceConfig
     {

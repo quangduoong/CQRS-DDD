@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace eShop.Infrastructure.Configurations;
+﻿namespace eShop.Application.Configurations;
 
 public static class MyDbConfig
 {

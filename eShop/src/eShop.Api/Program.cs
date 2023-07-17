@@ -1,5 +1,5 @@
-using eShop.Infrastructure.Configurations;
-using eShop.Infrastructure.Middleware;
+using eShop.Application.Configurations;
+using eShop.Application.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 

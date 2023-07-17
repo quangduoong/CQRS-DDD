@@ -1,8 +1,8 @@
-﻿using eShop.Infrastructure.Abstractions;
+﻿using eShop.Application.Abstractions;
 using eShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShop.Infrastructure.Repositories;
+namespace eShop.Application.Repositories;
 
 public class ProductRepository : IProductRepository
 {
@@ -18,6 +18,10 @@ public class ProductRepository : IProductRepository
 
     public async Task<Product?> GetByIdAsync(Guid id)
     {
-        return await _context.Products.FirstOrDefaultAsync(product => product.Id == id) ?? null;
+        return await _context.Products
+            .Where(product => product.Id == id)
+            .Include(product => product.PriceCurrency)
+            .FirstOrDefaultAsync()
+            ?? null;
     }
 }

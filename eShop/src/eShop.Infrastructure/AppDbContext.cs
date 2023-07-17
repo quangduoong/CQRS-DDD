@@ -1,29 +1,22 @@
 ﻿using eShop.Domain.Entities;
+using eShop.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace eShop.Infrastructure;
+namespace eShop.Application;
 
 public class AppDbContext : DbContext
 {
     public DbSet<Product> Products { get; set; }
+
+    public DbSet<PriceCurrency> PriceCurrencies { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<Product>(en =>
-        {
-            en.ToTable("products");
-            en.HasKey(prop => prop.Id);
-            en.Property(prop => prop.Name).HasColumnType("varchar(40)").IsRequired(true);
-            en.Property(prop => prop.Sku).HasPrecision(3).IsRequired(true);
-            en.Property(prop => prop.PriceAmount).HasPrecision(8).IsRequired(true);
-            en.Property(prop => prop.PriceAmount).IsRequired(true);
-        }
-        );
+        modelBuilder.AddMyEntityConfigs();
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,5 +27,4 @@ public class AppDbContext : DbContext
             .UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
             .UseSnakeCaseNamingConvention();
     }
-
 }

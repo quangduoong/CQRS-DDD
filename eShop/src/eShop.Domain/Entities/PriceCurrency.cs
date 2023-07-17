@@ -1,6 +1,11 @@
 ﻿namespace eShop.Domain.Entities;
 
-public enum PriceCurrency
+public record PriceCurrency
 {
-    VND = 1, USD = 2
+    public Guid Id { get; init; }
+
+    public string? Name { get; init; }
+
+    public string? Description { get; init; }
+
 }

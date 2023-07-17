@@ -12,7 +12,9 @@ public sealed class Product
 
     public double? PriceAmount { get; private set; }
 
-    public PriceCurrency PriceCurrency { get; private set; }
+    public PriceCurrency? PriceCurrency { get; private set; }
+
+    public Guid PriceCurrencyId { get; private set; }
 
     private Product() { }
 

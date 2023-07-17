@@ -1,13 +1,13 @@
 ﻿using Dapper;
-using eShop.Infrastructure.Products.Queries;
-using eShop.Infrastructure.Products.Responses;
+using eShop.Application.Products.Queries;
+using eShop.Application.Products.Responses;
 using eShop.Domain.Exceptions;
 using MediatR;
 using System.Data;
-using eShop.Infrastructure.Abstractions;
+using eShop.Application.Abstractions;
 using AutoMapper;
 
-namespace eShop.Infrastructure.Products.Handlers;
+namespace eShop.Application.Products.Handlers;
 
 public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductResponse>
 {

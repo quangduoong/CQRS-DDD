@@ -1,6 +1,6 @@
-﻿using eShop.Infrastructure.Profiles;
+﻿using eShop.Application.Profiles;
 
-namespace eShop.Infrastructure.Configurations;
+namespace eShop.Application.Configurations;
 
 public static class MyAutoMapperConfig
 {

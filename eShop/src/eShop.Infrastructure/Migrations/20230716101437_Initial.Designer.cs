@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using eShop.Infrastructure;
+using eShop.Application;
 
 #nullable disable
 
-namespace eShop.Infrastructure.Migrations
+namespace eShop.Application.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20230716101437_Initial")]
