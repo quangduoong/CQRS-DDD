@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace eShop.Application.Migrations
+namespace eShop.Domain.Migrations
 {
     /// <inheritdoc />
     public partial class AddPriceCurrencyEntity : Migration

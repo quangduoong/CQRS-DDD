@@ -1,8 +1,8 @@
-﻿using eShop.Application.Abstractions;
+﻿using eShop.Domain.Abstractions;
 using eShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShop.Application.Repositories;
+namespace eShop.Domain.Repositories;
 
 public class ProductRepository : IProductRepository
 {

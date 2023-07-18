@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using eShop.Application.Products.Commands;
-using eShop.Application.Products.Responses;
+using eShop.Domain.Products.Commands;
+using eShop.Domain.Products.Responses;
 using eShop.Domain.Entities;
-using eShop.Application.Abstractions;
+using eShop.Domain.Abstractions;
 using MediatR;
 
-namespace eShop.Application.Products.Handlers;
+namespace eShop.Domain.Products.Handlers;
 
 public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ProductResponse>
 {

@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace eShop.Application.Migrations
+namespace eShop.Domain.Migrations
 {
     /// <inheritdoc />
     public partial class AddRelationships1 : Migration

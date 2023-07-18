@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using eShop.Application;
+using eShop.Domain;
 
 #nullable disable
 
-namespace eShop.Application.Migrations
+namespace eShop.Domain.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20230717080725_AddRelationships1")]

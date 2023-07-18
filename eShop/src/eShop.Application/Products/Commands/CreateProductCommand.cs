@@ -1,8 +1,8 @@
-﻿using eShop.Application.Products.Requests;
-using eShop.Application.Products.Responses;
+﻿using eShop.Domain.Products.Requests;
+using eShop.Domain.Products.Responses;
 using MediatR;
 
-namespace eShop.Application.Products.Commands;
+namespace eShop.Domain.Products.Commands;
 
 public record CreateProductCommand(CreateProductRequest Product) : IRequest<ProductResponse>
 {

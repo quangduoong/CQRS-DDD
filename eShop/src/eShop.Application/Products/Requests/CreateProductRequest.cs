@@ -1,7 +1,4 @@
-﻿using eShop.Domain.Entities;
-using MediatR;
-
-namespace eShop.Application.Products.Requests;
+﻿namespace eShop.Domain.Products.Requests;
 
 public record CreateProductRequest
 {

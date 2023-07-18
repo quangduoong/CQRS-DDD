@@ -1,7 +1,7 @@
-﻿using eShop.Application.Products.Commands;
-using eShop.Application.Products.Queries;
-using eShop.Application.Products.Requests;
-using eShop.Application.Products.Responses;
+﻿using eShop.Domain.Products.Commands;
+using eShop.Domain.Products.Queries;
+using eShop.Domain.Products.Requests;
+using eShop.Domain.Products.Responses;
 using eShop.Domain.Exceptions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

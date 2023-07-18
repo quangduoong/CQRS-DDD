@@ -1,4 +1,4 @@
-﻿namespace eShop.Application.Products.Responses;
+﻿namespace eShop.Domain.Products.Responses;
 
 public record ProductResponse
 {

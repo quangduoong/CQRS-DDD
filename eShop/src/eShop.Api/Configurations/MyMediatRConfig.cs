@@ -1,8 +1,8 @@
-﻿using eShop.Application.Products.Commands;
-using eShop.Application.Products.Queries;
+﻿using eShop.Domain.Products.Commands;
+using eShop.Domain.Products.Queries;
 using System.Reflection;
 
-namespace eShop.Application.Configurations;
+namespace eShop.Domain.Configurations;
 
 public static class MyMediatRConfig
 {

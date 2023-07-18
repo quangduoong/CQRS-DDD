@@ -1,4 +1,4 @@
-﻿namespace eShop.Application.Configurations;
+﻿namespace eShop.Domain.Configurations;
 
 public static class MyDbConfig
 {
