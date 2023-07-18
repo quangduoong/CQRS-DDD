@@ -2,11 +2,11 @@
 
 public record CreateProductRequest
 {
-    public string? Name { get; init; }
+    public string Name { get; init; } = string.Empty;
 
-    public int? Sku { get; init; }
+    public int Sku { get; init; } = 0;
 
-    public double? PriceAmount { get; init; }
+    public double PriceAmount { get; init; } = 0;
 
-    public Guid? PriceCurrencyId { get; init; }
+    public Guid PriceCurrencyId { get; init; }
 }

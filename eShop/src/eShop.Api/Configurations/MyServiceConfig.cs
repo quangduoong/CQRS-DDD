@@ -1,6 +1,8 @@
 ﻿using eShop.Domain.Abstractions;
 using eShop.Api.Middleware;
 using eShop.Infrastructure.Repositories;
+using MediatR;
+using eShop.Application.Behaviors;
 
 namespace eShop.Api.Configurations
 {
@@ -10,8 +12,14 @@ namespace eShop.Api.Configurations
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
 
+            // Repositories
             services.AddScoped<IProductRepository, ProductRepository>();
+
+            // Exception class throwing middleware 
             services.AddTransient<ExceptionMiddleware>();
+
+            // Validation pipeline
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         }
     }
 }

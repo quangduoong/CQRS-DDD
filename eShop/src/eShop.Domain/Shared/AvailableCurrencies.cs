@@ -7,9 +7,9 @@ public class AvailableCurrencies
 {
     public List<PriceCurrency> Values { get; } = new();
 
-    public AvailableCurrencies()
+    public AvailableCurrencies(string jsonPath)
     {
-        StreamReader streamReader = new("../../currencies.json");
+        StreamReader streamReader = new(jsonPath);
         string json = streamReader.ReadToEnd();
         JsonSerializerOptions options = new()
         {

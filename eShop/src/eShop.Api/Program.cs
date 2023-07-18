@@ -13,6 +13,8 @@ builder.Services.AddMyAutoMapperConfig();
 
 builder.Services.AddMyMediatRConfig();
 
+builder.Services.AddMyValidationConfig();
+
 builder.Services.AddControllers().AddNewtonsoftJson(x =>
 {
     x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;

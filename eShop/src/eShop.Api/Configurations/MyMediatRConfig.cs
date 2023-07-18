@@ -11,7 +11,7 @@ public static class MyMediatRConfig
         if (services == null) throw new ArgumentNullException(nameof(services));
 
         Assembly[] assemblies = {
-            typeof(CreateProductCommand).GetTypeInfo().Assembly,
+                typeof(CreateProductCommand).GetTypeInfo().Assembly,
             typeof(GetProductByIdQuery).GetTypeInfo().Assembly
         };
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));

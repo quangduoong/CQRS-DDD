@@ -5,15 +5,15 @@ public class Product
 {
     public Guid Id { get; private set; }
 
-    public string? Name { get; private set; }
+    public string Name { get; private set; } = string.Empty;
 
-    public int? Sku { get; private set; }
+    public int Sku { get; private set; } = 0;
 
-    public double? PriceAmount { get; private set; }
+    public double PriceAmount { get; private set; } = 0;
 
     public Guid PriceCurrencyId { get; private set; }
 
-    public virtual PriceCurrency? PriceCurrency { get; private set; }
+    public virtual PriceCurrency PriceCurrency { get; private set; } = null!;
 
     private Product() { }
 
