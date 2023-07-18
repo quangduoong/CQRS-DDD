@@ -1,11 +1,13 @@
 [{
     "Id": "1491857a-9602-44c4-bebb-80ef5e0ca81e", 
     "Name": "VND", 
-    "Description":"Vietnamese currency."
+    "Description":"Vietnamese currency.", 
+    "Products":null
 }, 
 {
     "Id": "e347c43a-a547-42be-b134-5874454109a5", 
     "Name": "USD", 
-    "Description":"United State's currency."
+    "Description":"United State's currency.",
+    "Products":null
 }
 ]

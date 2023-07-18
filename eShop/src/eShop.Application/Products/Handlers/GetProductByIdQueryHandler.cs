@@ -6,6 +6,7 @@ using MediatR;
 using System.Data;
 using eShop.Application.Abstractions;
 using AutoMapper;
+using eShop.Domain.Entities;
 
 namespace eShop.Application.Products.Handlers;
 
@@ -22,7 +23,7 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, P
 
     public async Task<ProductResponse> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
     {
-        var product = await _repository.GetByIdAsync(request.ProductId);
+        Product? product = await _repository.GetByIdAsync(request.ProductId);
 
         return _mapper.Map<ProductResponse>(product)
             ?? throw new ProductNotFoundException(request.ProductId);

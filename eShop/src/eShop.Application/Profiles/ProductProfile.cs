@@ -10,7 +10,9 @@ public class ProductProfile : Profile
     public ProductProfile()
     {
         CreateMap<CreateProductRequest, Product>()
-            .ForMember(destination => destination.Id, options => options.MapFrom(src => Guid.NewGuid()));
-        CreateMap<Product, ProductResponse>();
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()));
+        CreateMap<PriceCurrency, PriceCurrencyResponse>();
+        CreateMap<Product, ProductResponse>()
+            .ForMember(dest => dest.PriceCurrency, opt => opt.MapFrom(src => src.PriceCurrency));
     }
 }

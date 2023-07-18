@@ -8,4 +8,5 @@ public record PriceCurrency
 
     public string? Description { get; init; }
 
+    public virtual ICollection<Product>? Products { get; init; }
 }

@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
+﻿
 namespace eShop.Domain.Entities;
 
-public sealed class Product
+public class Product
 {
     public Guid Id { get; private set; }
 
@@ -12,13 +11,13 @@ public sealed class Product
 
     public double? PriceAmount { get; private set; }
 
-    public PriceCurrency? PriceCurrency { get; private set; }
-
     public Guid PriceCurrencyId { get; private set; }
+
+    public virtual PriceCurrency? PriceCurrency { get; private set; }
 
     private Product() { }
 
-    public static Product? Create(Guid id, string name, int sku, double priceAmount, PriceCurrency priceCurrency)
+    public static Product? Create(Guid id, string name, int sku, double priceAmount, Guid priceCurrencyId)
     {
         return new()
         {
@@ -26,7 +25,7 @@ public sealed class Product
             Name = name,
             Sku = sku,
             PriceAmount = priceAmount,
-            PriceCurrency = priceCurrency
+            PriceCurrencyId = priceCurrencyId
         };
     }
 }

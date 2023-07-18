@@ -1,11 +1,6 @@
 ﻿using eShop.Domain.Entities;
+using eShop.Domain.Shared;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace eShop.Infrastructure;
 
@@ -20,12 +15,11 @@ public static class MyEntityConfigs
             en.Property(prop => prop.Name).HasColumnType("varchar(40)").IsRequired(true);
             en.Property(prop => prop.Sku).HasPrecision(3).IsRequired(true);
             en.Property(prop => prop.PriceAmount).HasPrecision(8).IsRequired(true);
-        }
-        );
+        });
 
         modelBuilder.Entity<Product>()
             .HasOne(product => product.PriceCurrency)
-            .WithMany()
+            .WithMany(priceCurrency => priceCurrency.Products)
             .HasForeignKey(product => product.PriceCurrencyId)
             .OnDelete(DeleteBehavior.Restrict);
 
@@ -37,11 +31,8 @@ public static class MyEntityConfigs
             en.Property(prop => prop.Description).IsRequired(true);
         });
 
-        StreamReader streamReader = new("../../currencies.json");
-        string json = streamReader.ReadToEnd();
-        List<PriceCurrency> priceCurrencies = JsonSerializer.Deserialize<List<PriceCurrency>>(json)!;
+        List<PriceCurrency> priceCurrencies = new AvailableCurrencies().Values;
 
         modelBuilder.Entity<PriceCurrency>().HasData(priceCurrencies);
     }
-
 }

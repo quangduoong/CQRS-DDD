@@ -39,7 +39,7 @@ public class ExceptionMiddleware : IMiddleware
             var response = JsonSerializer.Serialize(problemDetails);
             await context.Response.WriteAsync(response);
         }
-        catch (GlobalException e)
+        catch (Exception e)
         {
             _logger.LogError(exception: e, message: e.Message);
 
