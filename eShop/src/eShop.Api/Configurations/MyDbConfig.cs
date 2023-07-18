@@ -1,4 +1,6 @@
-﻿namespace eShop.Domain.Configurations;
+﻿using eShop.Infrastructure;
+
+namespace eShop.Api.Configurations;
 
 public static class MyDbConfig
 {

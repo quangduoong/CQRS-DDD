@@ -2,7 +2,7 @@
 using eShop.Domain.Products.Queries;
 using System.Reflection;
 
-namespace eShop.Domain.Configurations;
+namespace eShop.Api.Configurations;
 
 public static class MyMediatRConfig
 {

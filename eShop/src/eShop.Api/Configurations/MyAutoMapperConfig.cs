@@ -1,6 +1,6 @@
 ﻿using eShop.Domain.Profiles;
 
-namespace eShop.Domain.Configurations;
+namespace eShop.Api.Configurations;
 
 public static class MyAutoMapperConfig
 {

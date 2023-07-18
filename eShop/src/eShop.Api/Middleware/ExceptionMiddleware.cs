@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using System.Text.Json;
 
-namespace eShop.Domain.Middleware;
+namespace eShop.Api.Middleware;
 
 public class ExceptionMiddleware : IMiddleware
 {

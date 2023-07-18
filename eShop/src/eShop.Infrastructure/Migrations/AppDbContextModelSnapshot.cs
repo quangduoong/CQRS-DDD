@@ -7,7 +7,7 @@ using eShop.Domain;
 
 #nullable disable
 
-namespace eShop.Domain.Migrations
+namespace eShop.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot

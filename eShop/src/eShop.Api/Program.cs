@@ -1,5 +1,5 @@
-using eShop.Domain.Configurations;
-using eShop.Domain.Middleware;
+using eShop.Api.Configurations;
+using eShop.Api.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -3,7 +3,7 @@ using eShop.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace eShop.Domain;
+namespace eShop.Infrastructure;
 
 public class AppDbContext : DbContext
 {

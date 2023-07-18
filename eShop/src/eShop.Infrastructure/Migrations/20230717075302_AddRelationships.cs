@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace eShop.Domain.Migrations
+namespace eShop.Infrastructure.Migrations
 {
     /// <inheritdoc />
     public partial class AddRelationships : Migration
