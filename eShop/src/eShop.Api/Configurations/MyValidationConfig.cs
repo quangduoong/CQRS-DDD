@@ -1,4 +1,4 @@
-﻿using eShop.Domain.Validators;
+﻿using eShop.Application.Validators;
 using FluentValidation;
 using System.Reflection;
 

@@ -1,4 +1,4 @@
-﻿namespace eShop.Domain.Products.Requests;
+﻿namespace eShop.Application.Products.Requests;
 
 public record CreateProductRequest
 {

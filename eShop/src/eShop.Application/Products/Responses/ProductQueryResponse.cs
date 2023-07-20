@@ -1,6 +1,6 @@
-﻿namespace eShop.Domain.Products.Responses;
+﻿namespace eShop.Application.Products.Responses;
 
-public record ProductResponse
+public record ProductQueryResponse
 {
     public Guid Id { get; init; }
 

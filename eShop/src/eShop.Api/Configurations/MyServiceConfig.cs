@@ -15,7 +15,7 @@ namespace eShop.Api.Configurations
             // Repositories
             services.AddScoped<IProductRepository, ProductRepository>();
 
-            // Exception class throwing middleware 
+            // Exception throwing middleware 
             services.AddTransient<ExceptionMiddleware>();
 
             // Validation pipeline

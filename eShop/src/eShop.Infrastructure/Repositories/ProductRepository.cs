@@ -19,8 +19,9 @@ public class ProductRepository : IProductRepository
     public async Task<Product?> GetByIdAsync(Guid id)
     {
         return await _context.Products
+            .Where(product => product.Id == id)
             .Include(product => product.PriceCurrency)
-            .FirstOrDefaultAsync(product => product.Id == id)
+            .FirstOrDefaultAsync()
             ?? null;
     }
 }

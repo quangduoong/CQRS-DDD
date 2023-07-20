@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
+using eShop.Application.Products.Queries;
+using eShop.Application.Products.Responses;
 using eShop.Domain.Abstractions;
 using eShop.Domain.Entities;
-using eShop.Domain.Exceptions;
-using eShop.Domain.Products.Queries;
-using eShop.Domain.Products.Responses;
+using eShop.Domain.Errors;
+using eShop.Domain.Shared;
 using MediatR;
 
-namespace eShop.Domain.Products.Handlers;
+namespace eShop.Application.Products.Handlers;
 
-public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, ProductResponse>
+public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, Result<ProductQueryResponse>>
 {
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;
@@ -19,11 +20,15 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, P
         _mapper = mapper;
     }
 
-    public async Task<ProductResponse> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
+    public async Task<Result<ProductQueryResponse>> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
     {
         Product? product = await _repository.GetByIdAsync(request.ProductId);
 
-        return _mapper.Map<ProductResponse>(product)
-            ?? throw new ProductNotFoundException(request.ProductId);
+        if (product is null)
+            return Result.Failure<ProductQueryResponse>(ProductErrors.NotFound(request.ProductId));
+
+        ProductQueryResponse response = _mapper.Map<ProductQueryResponse>(product);
+
+        return Result.Success(response);
     }
 }

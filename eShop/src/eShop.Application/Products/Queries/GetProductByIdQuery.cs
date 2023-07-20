@@ -1,6 +1,7 @@
-﻿using eShop.Domain.Products.Responses;
+﻿using eShop.Application.Products.Responses;
+using eShop.Domain.Shared;
 using MediatR;
 
-namespace eShop.Domain.Products.Queries;
+namespace eShop.Application.Products.Queries;
 
-public record GetProductByIdQuery(Guid ProductId) : IRequest<ProductResponse>;
+public record GetProductByIdQuery(Guid ProductId) : IRequest<Result<ProductQueryResponse>>;

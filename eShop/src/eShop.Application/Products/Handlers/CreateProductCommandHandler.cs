@@ -1,13 +1,14 @@
 ﻿using AutoMapper;
-using eShop.Domain.Products.Commands;
-using eShop.Domain.Products.Responses;
-using eShop.Domain.Entities;
+using eShop.Application.Products.Commands;
+using eShop.Application.Products.Responses;
 using eShop.Domain.Abstractions;
+using eShop.Domain.Entities;
+using eShop.Domain.Shared;
 using MediatR;
 
-namespace eShop.Domain.Products.Handlers;
+namespace eShop.Application.Products.Handlers;
 
-public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, ProductResponse>
+public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<CreateProductResponse>>
 {
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;
@@ -18,10 +19,11 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
         _mapper = mapper;
     }
 
-    public async Task<ProductResponse> Handle(CreateProductCommand request, CancellationToken cancellationToken)
+    public async Task<Result<CreateProductResponse>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        Product newProduct = _mapper.Map<Product>(request.Product);
-        await _repository.AddAsync(newProduct);
-        return _mapper.Map<ProductResponse>(newProduct);
+        Product product = _mapper.Map<Product>(request.Product);
+        await _repository.AddAsync(product);
+
+        return Result.Success(_mapper.Map<CreateProductResponse>(product));
     }
 }

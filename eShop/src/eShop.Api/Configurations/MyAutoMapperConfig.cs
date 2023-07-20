@@ -1,4 +1,4 @@
-﻿using eShop.Domain.Profiles;
+﻿using eShop.Application.Profiles;
 
 namespace eShop.Api.Configurations;
 

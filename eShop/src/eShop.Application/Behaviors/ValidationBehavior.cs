@@ -1,11 +1,14 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
+﻿using eShop.Application.Products.Requests;
+using eShop.Application.Products.Responses;
+using eShop.Domain.Shared;
+using FluentValidation;
 using MediatR;
 
 namespace eShop.Application.Behaviors;
 
 public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
+    where TResponse : Result
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -14,24 +17,44 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
         _validators = validators;
     }
 
-    public Task<TResponse> Handle(
+    public async Task<TResponse> Handle(
         TRequest request,
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        ValidationContext<TRequest> context = new(request);
+        if (!_validators.Any())
+            return await next();
 
-        IEnumerable<ValidationFailure> failures = _validators
-            .Select(validator => validator.Validate(context))
+        IEnumerable<Error> failures = _validators
+            .Select(validator => validator.Validate(request))
             .SelectMany(validator => validator.Errors)
             .Where(error => error != null)
+            .Select(error => new Error(
+                error.PropertyName,
+                error.ErrorMessage))
+            .Distinct()
             .ToList();
 
         if (failures.Any())
         {
-            throw new ValidationException(failures);
+            return CreateValidationResult<TResponse>(failures);
         }
 
-        return next();
+        return await next();
+    }
+
+    private static TResult CreateValidationResult<TResult>(IEnumerable<Error> failures)
+        where TResult : Result
+    {
+        if (typeof(TResult) == typeof(Result))
+            return (new ValidationResult(failures) as TResult)!;
+
+        object validationResult = typeof(ValidationResult<>)
+           .GetGenericTypeDefinition()
+           .MakeGenericType(typeof(TResult).GenericTypeArguments[0])
+           .GetConstructor(new[] { typeof(IEnumerable<Error>) })!
+           .Invoke(new[] { failures });
+
+        return (TResult)validationResult;
     }
 }

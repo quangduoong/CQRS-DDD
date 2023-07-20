@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using eShop.Domain.Products.Requests;
-using eShop.Domain.Products.Responses;
+using eShop.Application.Products.Requests;
+using eShop.Application.Products.Responses;
 using eShop.Domain.Entities;
 
-namespace eShop.Domain.Profiles;
+namespace eShop.Application.Profiles;
 
 public class ProductProfile : Profile
 {
@@ -12,7 +12,8 @@ public class ProductProfile : Profile
         CreateMap<CreateProductRequest, Product>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => Guid.NewGuid()));
         CreateMap<PriceCurrency, PriceCurrencyResponse>();
-        CreateMap<Product, ProductResponse>()
+        CreateMap<Product, ProductQueryResponse>()
             .ForMember(dest => dest.PriceCurrency, opt => opt.MapFrom(src => src.PriceCurrency));
+        CreateMap<Product, CreateProductResponse>();
     }
 }

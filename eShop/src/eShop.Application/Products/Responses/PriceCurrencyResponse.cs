@@ -1,4 +1,4 @@
-﻿namespace eShop.Domain.Products.Responses;
+﻿namespace eShop.Application.Products.Responses;
 
 public record PriceCurrencyResponse
 {
