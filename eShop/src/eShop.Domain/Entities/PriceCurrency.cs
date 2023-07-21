@@ -1,4 +1,6 @@
-﻿namespace eShop.Domain.Entities;
+﻿using Newtonsoft.Json;
+
+namespace eShop.Domain.Entities;
 
 public record PriceCurrency
 {
@@ -8,5 +10,6 @@ public record PriceCurrency
 
     public string Description { get; init; } = string.Empty;
 
+    [JsonIgnore]
     public virtual ICollection<Product> Products { get; init; } = null!;
 }

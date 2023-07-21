@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  eshop.api:
+    container_name: eshop
+    image: quangduoong/eshop
+    build:
+      context: .
+      dockerfile: eShop/src/eShop.Api/Dockerfile
+    ports:
+      - 5001:80
+    environment: 
+      - DB_HOST=eshop-db 
+      - DB_PORT=3306
+      - DB_NAME=eshop
+      - DB_ROOT_PASSWORD=mysql_pa55w0rd! 
+      - REDIS_CACHEDB_HOST=redis-cache-db
+      - REDIS_CACHEDB_PORT=6379
+
+  eshop-db:
+    container_name: eshop-db
+    image: mysql:8.0.33
+    environment:
+      MYSQL_ROOT_PASSWORD: mysql_pa55w0rd!
+    ports:
+      - 18001:3306
+    volumes:
+      - ./.containers/database/eshop:/var/lib/mysql  
+
+  redis-cache-db: 
+    container_name: redis-cache-db
+    image: redis:latest 
+    ports:
+      - 6379:6379 

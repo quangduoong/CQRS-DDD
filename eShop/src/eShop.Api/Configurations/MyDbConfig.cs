@@ -1,4 +1,5 @@
 ﻿using eShop.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 namespace eShop.Api.Configurations;
 

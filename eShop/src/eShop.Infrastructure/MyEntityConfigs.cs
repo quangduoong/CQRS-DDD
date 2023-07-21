@@ -31,8 +31,6 @@ public static class MyEntityConfigs
             en.Property(prop => prop.Description).IsRequired(true);
         });
 
-        List<PriceCurrency> priceCurrencies = new AvailableCurrencies("../../currencies.json").Values;
-
-        modelBuilder.Entity<PriceCurrency>().HasData(priceCurrencies);
+        modelBuilder.Entity<PriceCurrency>().HasData(new AvailableCurrencies().GetAll());
     }
 }

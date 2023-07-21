@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Collect configurations from layers.
 builder.Services.AddMyDbConfig();
 
-builder.Services.AddMyServiceConfig();
+builder.Services.AddMyServiceConfig(builder.Configuration);
 
 builder.Services.AddMyAutoMapperConfig();
 

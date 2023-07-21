@@ -4,11 +4,11 @@ namespace eShop.Presentation.ApiResponses;
 
 public class ApiResponse<TValue> : ApiResponse
 {
-    public TValue? Value { get; set; }
+    public TValue? Payload { get; set; }
 
-    public ApiResponse(HttpStatusCode statusCode, string message, TValue value)
+    public ApiResponse(HttpStatusCode statusCode, string message, TValue payload)
         : base(statusCode, message)
     {
-        Value = value;
+        Payload = payload;
     }
 }

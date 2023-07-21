@@ -8,21 +8,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace eShop.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class AddPriceCurrencyEntity : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "price_currency",
-                table: "products");
-
-            migrationBuilder.AddColumn<Guid>(
-                name: "price_currency_id",
-                table: "products",
-                type: "char(36)",
-                nullable: true,
-                collation: "ascii_general_ci");
+            migrationBuilder.AlterDatabase()
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
                 name: "price_currency",
@@ -40,6 +32,29 @@ namespace eShop.Infrastructure.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "products",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    name = table.Column<string>(type: "varchar(40)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    sku = table.Column<int>(type: "int", precision: 3, nullable: false),
+                    price_amount = table.Column<double>(type: "double", precision: 8, nullable: false),
+                    price_currency_id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_products", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_products_price_currencies_price_currency_id",
+                        column: x => x.price_currency_id,
+                        principalTable: "price_currency",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.InsertData(
                 table: "price_currency",
                 columns: new[] { "id", "description", "name" },
@@ -53,39 +68,16 @@ namespace eShop.Infrastructure.Migrations
                 name: "ix_products_price_currency_id",
                 table: "products",
                 column: "price_currency_id");
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_products_price_currency_price_currency_id",
-                table: "products",
-                column: "price_currency_id",
-                principalTable: "price_currency",
-                principalColumn: "id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "fk_products_price_currency_price_currency_id",
-                table: "products");
+            migrationBuilder.DropTable(
+                name: "products");
 
             migrationBuilder.DropTable(
                 name: "price_currency");
-
-            migrationBuilder.DropIndex(
-                name: "ix_products_price_currency_id",
-                table: "products");
-
-            migrationBuilder.DropColumn(
-                name: "price_currency_id",
-                table: "products");
-
-            migrationBuilder.AddColumn<int>(
-                name: "price_currency",
-                table: "products",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
         }
     }
 }

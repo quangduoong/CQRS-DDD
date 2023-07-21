@@ -17,15 +17,13 @@ public class Product
 
     private Product() { }
 
-    public static Product? Create(Guid id, string name, int sku, double priceAmount, Guid priceCurrencyId)
+    public Product(Guid id, string name, int sku, double priceAmount, Guid priceCurrencyId, PriceCurrency priceCurrency)
     {
-        return new()
-        {
-            Id = id,
-            Name = name,
-            Sku = sku,
-            PriceAmount = priceAmount,
-            PriceCurrencyId = priceCurrencyId
-        };
+        Id = id;
+        Name = name;
+        Sku = sku;
+        PriceAmount = priceAmount;
+        PriceCurrencyId = priceCurrencyId;
+        PriceCurrency = priceCurrency;
     }
 }

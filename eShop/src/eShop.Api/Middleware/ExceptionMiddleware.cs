@@ -20,25 +20,6 @@ public class ExceptionMiddleware : IMiddleware
         {
             await next(context);
         }
-        catch (ProductNotFoundException e)
-        {
-            _logger.LogError(exception: e, message: e.Message);
-
-            int statusCode = (int)HttpStatusCode.NotFound;
-            context.Response.StatusCode = statusCode;
-
-            ProblemDetails problemDetails = new()
-            {
-                Status = statusCode,
-                Type = "Object Not Found",
-                Title = "Product Id not found.",
-                Detail = e.Message,
-            };
-
-            context.Response.ContentType = "application/json";
-            var response = JsonSerializer.Serialize(problemDetails);
-            await context.Response.WriteAsync(response);
-        }
         catch (Exception e)
         {
             _logger.LogError(exception: e, message: e.Message);

@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using eShop.Domain;
+using eShop.Infrastructure;
 
 #nullable disable
 
@@ -69,8 +69,7 @@ namespace eShop.Infrastructure.Migrations
                         .HasColumnType("varchar(40)")
                         .HasColumnName("name");
 
-                    b.Property<double?>("PriceAmount")
-                        .IsRequired()
+                    b.Property<double>("PriceAmount")
                         .HasPrecision(8)
                         .HasColumnType("double")
                         .HasColumnName("price_amount");
@@ -79,8 +78,7 @@ namespace eShop.Infrastructure.Migrations
                         .HasColumnType("char(36)")
                         .HasColumnName("price_currency_id");
 
-                    b.Property<int?>("Sku")
-                        .IsRequired()
+                    b.Property<int>("Sku")
                         .HasPrecision(3)
                         .HasColumnType("int")
                         .HasColumnName("sku");
@@ -101,7 +99,7 @@ namespace eShop.Infrastructure.Migrations
                         .HasForeignKey("PriceCurrencyId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
-                        .HasConstraintName("fk_products_price_currency_price_currency_id");
+                        .HasConstraintName("fk_products_price_currencies_price_currency_id");
 
                     b.Navigation("PriceCurrency");
                 });
