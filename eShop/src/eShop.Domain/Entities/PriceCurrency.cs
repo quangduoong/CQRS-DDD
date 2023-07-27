@@ -1,15 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using eShop.Domain.Primitives;
+using Newtonsoft.Json;
 
 namespace eShop.Domain.Entities;
 
-public record PriceCurrency
+public class PriceCurrency : Entity
 {
-    public Guid Id { get; init; }
+    public string Name { get; init; }
 
-    public string Name { get; init; } = string.Empty;
-
-    public string Description { get; init; } = string.Empty;
+    public string Description { get; init; }
 
     [JsonIgnore]
-    public virtual ICollection<Product> Products { get; init; } = null!;
+    public virtual ICollection<Product> Products { get; init; } = default!;
+
+    public PriceCurrency(Guid id, string name, string description) : base(id)
+    {
+        Name = name;
+        Description = description;
+    }
 }

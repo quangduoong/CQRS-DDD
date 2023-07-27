@@ -1,15 +1,14 @@
-﻿
+﻿using eShop.Domain.Primitives;
+
 namespace eShop.Domain.Entities;
 
-public class Product
+public class Product : AggregateRoot
 {
-    public Guid Id { get; private set; }
+    public string Name { get; private set; } = default!;
 
-    public string Name { get; private set; } = string.Empty;
+    public int Sku { get; private set; }
 
-    public int Sku { get; private set; } = 0;
-
-    public double PriceAmount { get; private set; } = 0;
+    public double PriceAmount { get; private set; }
 
     public Guid PriceCurrencyId { get; private set; }
 
@@ -17,13 +16,16 @@ public class Product
 
     private Product() { }
 
-    public Product(Guid id, string name, int sku, double priceAmount, Guid priceCurrencyId, PriceCurrency priceCurrency)
+    public Product(
+        Guid id,
+        string name,
+        int sku,
+        double priceAmount,
+        Guid priceCurrencyId) : base(id)
     {
-        Id = id;
         Name = name;
         Sku = sku;
         PriceAmount = priceAmount;
         PriceCurrencyId = priceCurrencyId;
-        PriceCurrency = priceCurrency;
     }
 }

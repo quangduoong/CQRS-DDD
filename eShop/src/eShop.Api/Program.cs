@@ -1,5 +1,7 @@
 using eShop.Api.Configurations;
 using eShop.Api.Middleware;
+using eShop.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,5 +42,17 @@ app.UseAuthorization();
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
+
+// Migrations
+using (IServiceScope scope = app.Services.CreateScope())
+{
+    IServiceProvider services = scope.ServiceProvider;
+    AppDbContext context = services.GetRequiredService<AppDbContext>();
+
+    if (context.Database.GetPendingMigrations().Any())
+    {
+        context.Database.Migrate();
+    }
+}
 
 app.Run();

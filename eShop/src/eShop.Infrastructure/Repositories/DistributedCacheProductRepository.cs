@@ -35,16 +35,21 @@ public class DistributedCacheProductRepository : IProductRepository
         {
             foundProduct = await _decorator.GetByIdAsync(id);
 
-            if (foundProduct is null) return null;
+            if (foundProduct is null)
+                return null;
 
-            await _distributedCache.SetStringAsync(cacheKey, JsonConvert.SerializeObject(foundProduct));
+            await _distributedCache
+                .SetStringAsync(
+                    cacheKey,
+                    JsonConvert.SerializeObject(foundProduct));
 
             return foundProduct;
         }
 
         foundProduct = JsonConvert.DeserializeObject<Product>(cachedProduct);
 
-        if (foundProduct is not null) _dbContext.Set<Product>().Attach(foundProduct);
+        if (foundProduct is not null)
+            _dbContext.Set<Product>().Attach(foundProduct);
 
         return foundProduct;
     }
