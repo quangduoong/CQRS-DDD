@@ -8,7 +8,7 @@ using MediatR;
 
 namespace eShop.Application.Products.Handlers;
 
-public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<CreateProductResponse>>
+internal sealed class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, Result<CreateProductResponse>>
 {
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;
@@ -23,6 +23,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
     {
         Product product = _mapper.Map<Product>(request.Product);
         await _repository.AddAsync(product);
+        await _repository.SaveChangesAsync();
 
         return Result.Success(_mapper.Map<CreateProductResponse>(product));
     }

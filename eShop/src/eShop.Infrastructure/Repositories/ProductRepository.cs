@@ -13,7 +13,6 @@ public class ProductRepository : IProductRepository
     public async Task AddAsync(Product product)
     {
         await _context.Products.AddAsync(product);
-        await _context.SaveChangesAsync();
     }
 
     public async Task<Product?> GetByIdAsync(Guid id)
@@ -23,5 +22,10 @@ public class ProductRepository : IProductRepository
             .Include(product => product.PriceCurrency)
             .FirstOrDefaultAsync()
             ?? null;
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
     }
 }

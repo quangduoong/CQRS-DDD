@@ -9,7 +9,7 @@ using MediatR;
 
 namespace eShop.Application.Products.Handlers;
 
-public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, Result<ProductQueryResponse>>
+internal sealed class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, Result<ProductQueryResponse>>
 {
     private readonly IProductRepository _repository;
     private readonly IMapper _mapper;

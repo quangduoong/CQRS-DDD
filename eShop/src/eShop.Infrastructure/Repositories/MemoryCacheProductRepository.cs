@@ -30,5 +30,7 @@ public class MemoryCacheProductRepository : IProductRepository
             return await _decorator.GetByIdAsync(id);
         });
     }
+
+    public async Task SaveChangesAsync() => await _decorator.SaveChangesAsync();
 }
 

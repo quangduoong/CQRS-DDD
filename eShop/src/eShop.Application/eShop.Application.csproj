@@ -21,7 +21,10 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\eShop.Domain\eShop.Domain.csproj" />
-		<ProjectReference Include="..\eShop.Infrastructure\eShop.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="eShop.Application.UnitTests"></InternalsVisibleTo>
 	</ItemGroup>
 
 </Project>
