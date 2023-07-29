@@ -25,6 +25,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="eShop.Application.UnitTests"></InternalsVisibleTo>
+		<InternalsVisibleTo Include="eShop.Application.IntegrationTests"></InternalsVisibleTo>
 	</ItemGroup>
 
 </Project>

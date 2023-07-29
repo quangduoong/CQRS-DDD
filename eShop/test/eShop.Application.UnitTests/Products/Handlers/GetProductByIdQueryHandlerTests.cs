@@ -22,10 +22,11 @@ public class GetProductByIdQueryHandlerTests
         _mapperMock = new();
     }
 
-    [Theory]
-    [InlineData("841b6e5d-b9f6-42b9-8fa8-188c96f2814c")]
-    public async Task Handle_Should_ReturnFailureResult_WhenProductIdNotFound(Guid fakeProductId)
+    [Fact]
+    public async Task Handle_ShouldReturnFailureResult_WhenProductIdNotFound()
     {
+        // Arrange
+        Guid fakeProductId = Guid.NewGuid();
         GetProductByIdQuery query = new(fakeProductId);
 
         _productRepositoryMock
