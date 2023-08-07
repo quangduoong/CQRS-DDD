@@ -2,6 +2,7 @@
 using eShop.Application.Products.Queries;
 using eShop.Application.Products.Requests;
 using eShop.Application.Products.Responses;
+using eShop.Domain.DomainEvents;
 using eShop.Domain.Errors;
 using eShop.Domain.Shared;
 using eShop.Presentation.ApiResponses;
@@ -15,10 +16,12 @@ namespace eShop.Domain.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly ISender _sender;
+    private readonly IPublisher _publisher;
 
-    public ProductController(ISender sender)
+    public ProductController(ISender sender, IPublisher publisher)
     {
         _sender = sender;
+        _publisher = publisher;
     }
 
     [HttpGet("{productId}")]
@@ -42,6 +45,8 @@ public class ProductController : ControllerBase
 
         if (!result.IsSuccess)
             return HandleValidationResponse(result);
+
+        await _publisher.Publish(new ProductDomainEvents.Created(result.Value.Id));
 
         return CreatedAtAction(
             nameof(GetProductById),

@@ -17,7 +17,7 @@ public class ProductServiceApiFactory<TProgram, TDbContext> :
 {
     private readonly MySqlContainer _container = new MySqlBuilder()
             .WithEnvironment("MYSQL_ROOT_PASSWORD", "pa55w0rd!")
-            .WithHostname("localhost")
+            .WithName("eshop-product-service-db")
             .WithDatabase("eshop")
             .WithPortBinding(18001, 3306)
             .WithWaitStrategy(

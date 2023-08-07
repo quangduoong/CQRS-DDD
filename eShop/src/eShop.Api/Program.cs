@@ -1,5 +1,4 @@
 using eShop.Api.Configurations;
-using eShop.Api.Helpers;
 using eShop.Api.Middleware;
 using eShop.Infrastructure;
 using Microsoft.EntityFrameworkCore;
