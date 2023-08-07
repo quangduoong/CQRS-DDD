@@ -6,24 +6,10 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-// Collect configurations from layers.
-bool isInTestEnv = builder.Environment.EnvironmentName.Equals("Test");
-if (!isInTestEnv)
-    builder.Services.AddMyDbConfig();
-
-builder.Services.AddMyServicesConfig(isInTestEnv);
-
-builder.Services.AddMyMediatRConfig();
-
-builder.Services.AddMyValidationConfig();
-
-builder.Services.AddControllers().AddNewtonsoftJson(x =>
-{
-    x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-});
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.InstallConfigServices(
+    builder.Configuration,
+    builder.Environment.EnvironmentName,
+    typeof(IServiceInstaller).Assembly);
 
 var app = builder.Build();
 
@@ -44,7 +30,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.MapControllers();
 
 // Migrations
-if (!isInTestEnv)
+if (!builder.Environment.EnvironmentName.Equals("Test"))
     using (IServiceScope scope = app.Services.CreateScope())
     {
         IServiceProvider services = scope.ServiceProvider;

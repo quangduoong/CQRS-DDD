@@ -1,19 +1,21 @@
-﻿using eShop.Application.Products.Commands;
+﻿using eShop.Application.Behaviors;
+using eShop.Application.Products.Commands;
 using eShop.Application.Products.Queries;
+using MediatR;
 using System.Reflection;
 
 namespace eShop.Api.Configurations;
 
-public static class MyMediatRConfig
+public class ApplicationServiceInstaller : IServiceInstaller
 {
-    public static void AddMyMediatRConfig(this IServiceCollection services)
+    public void Install(IServiceCollection services, IConfiguration configuration, string envName)
     {
-        if (services == null) throw new ArgumentNullException(nameof(services));
-
         Assembly[] assemblies = {
             typeof(CreateProductCommand).GetTypeInfo().Assembly,
             typeof(GetProductByIdQuery).GetTypeInfo().Assembly
         };
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
     }
 }
+

@@ -1,6 +1,4 @@
-﻿using eShop.Application.Products.Requests;
-using eShop.Application.Products.Responses;
-using eShop.Domain.Shared;
+﻿using eShop.Domain.Shared;
 using FluentValidation;
 using MediatR;
 
