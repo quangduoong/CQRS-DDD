@@ -46,7 +46,7 @@ public class ProductController : ControllerBase
         if (!result.IsSuccess)
             return HandleValidationResponse(result);
 
-        await _publisher.Publish(new ProductDomainEvent.Created(result.Value.Id));
+        await _publisher.Publish(new ProductDomainEvents.Created(result.Value.Id));
 
         return CreatedAtAction(
             nameof(GetProductById),

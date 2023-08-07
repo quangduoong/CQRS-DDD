@@ -1,8 +1,9 @@
 ﻿using eShop.Application.Products.Commands;
+using eShop.Domain.Entities;
 using eShop.Domain.Shared;
 using FluentValidation;
 
-namespace eShop.Application.Products.Validators;
+namespace eShop.Application.Validators;
 
 public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {

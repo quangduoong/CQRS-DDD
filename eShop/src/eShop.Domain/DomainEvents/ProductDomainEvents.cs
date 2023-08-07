@@ -2,7 +2,7 @@
 
 namespace eShop.Domain.DomainEvents;
 
-public sealed class ProductDomainEvent
+public sealed class ProductDomainEvents
 {
     public sealed record Created(Guid Id) : IDomainEvent { }
 }
