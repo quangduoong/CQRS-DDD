@@ -38,7 +38,7 @@ public class Product : AggregateRoot
         Guid priceCurrencyId)
     {
         Product newProduct = new(id, name, sku, priceAmount, priceCurrencyId);
-        newProduct.RaiseDomainEvent(new ProductDomainEvents.Created(id));
+        newProduct.RaiseDomainEvent(new ProductDomainEvent.Created(id));
         return newProduct;
     }
 }

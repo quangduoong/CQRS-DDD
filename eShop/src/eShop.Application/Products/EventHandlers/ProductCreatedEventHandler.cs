@@ -4,7 +4,7 @@ using Microsoft.Extensions.Logging;
 
 namespace eShop.Application.Products.EventHandlers;
 
-public class ProductCreatedEventHandler : INotificationHandler<ProductDomainEvents.Created>
+public class ProductCreatedEventHandler : INotificationHandler<ProductDomainEvent.Created>
 {
     private readonly ILogger<ProductCreatedEventHandler> _logger;
 
@@ -13,7 +13,7 @@ public class ProductCreatedEventHandler : INotificationHandler<ProductDomainEven
         _logger = logger;
     }
 
-    public async Task Handle(ProductDomainEvents.Created notification, CancellationToken cancellationToken)
+    public async Task Handle(ProductDomainEvent.Created notification, CancellationToken cancellationToken)
     {
         _logger.LogInformation("\"Product created\" event raised");
         await Task.CompletedTask;
