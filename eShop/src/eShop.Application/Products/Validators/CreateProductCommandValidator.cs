@@ -2,7 +2,7 @@
 using eShop.Domain.Shared;
 using FluentValidation;
 
-namespace eShop.Application.Validators;
+namespace eShop.Application.Products.Validators;
 
 public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
 {
