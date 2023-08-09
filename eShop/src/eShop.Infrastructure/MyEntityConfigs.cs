@@ -1,5 +1,6 @@
 ﻿using eShop.Domain.Entities;
 using eShop.Domain.Shared;
+using eShop.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace eShop.Infrastructure;
@@ -29,6 +30,17 @@ public static class MyEntityConfigs
             en.HasKey(prop => prop.Id);
             en.Property(prop => prop.Name).HasMaxLength(3).IsRequired(true);
             en.Property(prop => prop.Description).IsRequired(true);
+        });
+
+        modelBuilder.Entity<OutboxMessage>(en =>
+        {
+            en.ToTable("outbox_message");
+            en.HasKey(prop => prop.Id);
+            en.Property(prop => prop.Type).HasMaxLength(255).IsRequired(true);
+            en.Property(prop => prop.Content).IsRequired(true);
+            en.Property(prop => prop.OccurredOnUtc).IsRequired(false);
+            en.Property(prop => prop.ProcessedOnUtc).IsRequired(false);
+            en.Property(prop => prop.Error).HasMaxLength(255).IsRequired(false);
         });
 
         modelBuilder.Entity<PriceCurrency>().HasData(new AvailableCurrencies().GetAll());

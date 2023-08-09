@@ -1,13 +1,14 @@
 ﻿using eShop.Domain.Entities;
+using eShop.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
 namespace eShop.Infrastructure;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Product> Products { get; set; }
+    public DbSet<Product> Products { get; set; } = default!;
 
-    public DbSet<PriceCurrency> PriceCurrencies { get; set; }
+    public DbSet<OutboxMessage> OutboxMessages { get; set; } = default!;
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 

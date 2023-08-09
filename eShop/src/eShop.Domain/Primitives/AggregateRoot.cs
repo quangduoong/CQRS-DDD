@@ -10,6 +10,10 @@ public abstract class AggregateRoot : Entity
     {
     }
 
+    public IReadOnlyCollection<IDomainEvent> GetDomainEvents() => _domainEvents.ToList();
+
+    public void ClearDomainEvents() => _domainEvents.Clear();
+
     protected void RaiseDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);

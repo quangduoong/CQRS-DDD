@@ -2,7 +2,7 @@
 
 namespace eShop.Api.Configurations;
 
-internal static class ConfigManager
+internal static class DependencyInjectionManager
 {
     public static IServiceCollection InstallConfigServices(
         this IServiceCollection services,
