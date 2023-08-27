@@ -1,5 +1,6 @@
 ﻿using eShop.Domain.DomainEvents;
 using eShop.Domain.Primitives;
+using Newtonsoft.Json;
 
 namespace eShop.Domain.Entities;
 
@@ -15,9 +16,7 @@ public class Product : AggregateRoot
 
     public virtual PriceCurrency PriceCurrency { get; private set; } = null!;
 
-    private Product() { }
-
-    private Product(
+    public Product(
         Guid id,
         string name,
         int sku,
@@ -30,6 +29,20 @@ public class Product : AggregateRoot
         PriceCurrencyId = priceCurrencyId;
     }
 
+    [JsonConstructor]
+    public Product(
+        Guid id,
+        string name,
+        int sku,
+        double priceAmount,
+        PriceCurrency priceCurrency) : base(id)
+    {
+        Name = name;
+        Sku = sku;
+        PriceAmount = priceAmount;
+        PriceCurrency = priceCurrency;
+    }
+
     public static Product Create(
         Guid id,
         string name,
@@ -38,7 +51,7 @@ public class Product : AggregateRoot
         Guid priceCurrencyId)
     {
         Product newProduct = new(id, name, sku, priceAmount, priceCurrencyId);
-        newProduct.RaiseDomainEvent(new ProductDomainEvent.Created(id));
+        newProduct.RaiseDomainEvent(new DomainEvents.DomainEvents.ProductCreated(id));
         return newProduct;
     }
 }

@@ -28,4 +28,8 @@
 		<InternalsVisibleTo Include="eShop.Application.IntegrationTests"></InternalsVisibleTo>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Abstractions\" />
+	</ItemGroup>
+
 </Project>

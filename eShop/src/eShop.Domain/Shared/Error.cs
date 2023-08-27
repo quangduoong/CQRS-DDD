@@ -19,7 +19,7 @@ public class Error : IEquatable<Error>
     public bool Equals(Error? other)
     {
         if (this is null && other is null) return true;
-        if (this.Code == other?.Code) return true;
+        if (Code == other?.Code) return true;
 
         return false;
     }

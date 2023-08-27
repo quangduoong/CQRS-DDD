@@ -19,9 +19,9 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C81BE6B9-7566-4FA0-BAF1-6624AB50E665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Application.UnitTests", "eShop\test\eShop.Application.UnitTests\eShop.Application.UnitTests.csproj", "{2BA2166A-52D0-448B-9F56-9323A13BCC6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Application.UnitTests", "eShop\test\eShop.Application.UnitTests\eShop.Application.UnitTests.csproj", "{2BA2166A-52D0-448B-9F56-9323A13BCC6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eShop.Application.IntegrationTests", "eShop\test\eShop.Application.IntegrationTests\eShop.Application.IntegrationTests.csproj", "{9B43E7CD-CA40-4E2B-B2DC-01AD3A54EE2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eShop.Application.IntegrationTests", "eShop\test\eShop.Application.IntegrationTests\eShop.Application.IntegrationTests.csproj", "{9B43E7CD-CA40-4E2B-B2DC-01AD3A54EE2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

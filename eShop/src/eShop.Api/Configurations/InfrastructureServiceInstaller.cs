@@ -21,27 +21,33 @@ public class InfrastructureServiceInstaller : IServiceInstaller
             AddDbContext(services);
 
         services.AddScoped<IProductRepository, ProductRepository>();
-        services.Decorate<IProductRepository, DistributedCacheProductRepository>();
+
+        if (!envName.Equals("Test"))
+            services.Decorate<IProductRepository, DistributedCacheProductRepository>();
+
         services.AddAutoMapper(new Assembly[] {
                 typeof(ProductProfile).GetTypeInfo().Assembly });
 
-        services.AddQuartz(config =>
+        if (!envName.Equals("Test"))
         {
-            JobKey jobKey = new(nameof(ProcessOutboxMessageJob));
+            services.AddQuartz(config =>
+            {
+                JobKey jobKey = new(nameof(ProcessOutboxMessageJob));
 
-            config
-                .AddJob<ProcessOutboxMessageJob>(jobKey)
-                .AddTrigger(trigger =>
-                {
-                    trigger
-                        .ForJob(jobKey)
-                        .WithSimpleSchedule(schedule =>
-                        {
-                            schedule.WithIntervalInMinutes(5).RepeatForever();
-                        });
-                });
-        });
-        services.AddQuartzHostedService();
+                config
+                    .AddJob<ProcessOutboxMessageJob>(jobKey)
+                    .AddTrigger(trigger =>
+                    {
+                        trigger
+                            .ForJob(jobKey)
+                            .WithSimpleSchedule(schedule =>
+                            {
+                                schedule.WithIntervalInMinutes(1).RepeatForever();
+                            });
+                    });
+            });
+            services.AddQuartzHostedService();
+        }
     }
 
     private static void AddDbContext(IServiceCollection services)

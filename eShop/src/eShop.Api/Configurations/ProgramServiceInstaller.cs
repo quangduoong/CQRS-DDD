@@ -1,7 +1,5 @@
 ﻿using eShop.Api.Middleware;
-using eShop.Domain.Abstractions;
 using eShop.Domain.Exceptions;
-using eShop.Infrastructure.Repositories;
 
 namespace eShop.Api.Configurations;
 
@@ -24,8 +22,8 @@ public class ProgramServiceInstaller : IServiceInstaller
                 opt.Configuration = $"{host}:{port},abortConnect=false";
             }); // Redis distributed cached service
 
-            services.AddTransient<ExceptionMiddleware>();
         }
+        services.AddTransient<ExceptionMiddleware>();
     }
 }
 

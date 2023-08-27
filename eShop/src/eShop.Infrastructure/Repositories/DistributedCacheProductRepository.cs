@@ -49,7 +49,7 @@ public class DistributedCacheProductRepository : IProductRepository
         foundProduct = JsonConvert.DeserializeObject<Product>(cachedProduct);
 
         if (foundProduct is not null)
-            _dbContext.Set<Product>().Attach(foundProduct);
+            _dbContext.Products.Attach(foundProduct);
 
         return foundProduct;
     }

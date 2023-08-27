@@ -26,4 +26,8 @@
 		<ProjectReference Include="..\eShop.Domain\eShop.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="eShop.Api"/>
+	</ItemGroup>
+
 </Project>

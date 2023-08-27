@@ -19,7 +19,7 @@ public class ProductServiceApiFactory<TProgram, TDbContext> :
             .WithEnvironment("MYSQL_ROOT_PASSWORD", "pa55w0rd!")
             .WithName("eshop-product-service-db")
             .WithDatabase("eshop")
-            .WithPortBinding(18001, 3306)
+            .WithPortBinding(18002, 3306)
             .WithWaitStrategy(
                 Wait.ForUnixContainer().UntilPortIsAvailable(3306))
             .Build();
@@ -41,7 +41,9 @@ public class ProductServiceApiFactory<TProgram, TDbContext> :
             services.AddDbContext<TDbContext>(options =>
             {
                 string connectionString = _container.GetConnectionString();
-                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+                options.UseMySql(
+                    connectionString,
+                    ServerVersion.AutoDetect(connectionString));
             });
 
             // Ensure db was created.

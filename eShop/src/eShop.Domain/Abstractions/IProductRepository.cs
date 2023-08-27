@@ -2,9 +2,7 @@
 
 namespace eShop.Domain.Abstractions;
 
-public interface IProductRepository
+public interface IProductRepository : IRepository<Product>
 {
-    Task<Product?> GetByIdAsync(Guid id);
-    Task AddAsync(Product product);
-    Task SaveChangesAsync();
+
 }
