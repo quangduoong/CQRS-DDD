@@ -1,6 +1,6 @@
 ﻿using eShop.Application.Products.Requests;
 using eShop.Domain.Shared;
-using eShop.Infrastructure;
+using eShop.Infrastructure.Database;
 using FluentAssertions;
 using System.Net;
 using System.Net.Http.Json;

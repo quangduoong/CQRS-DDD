@@ -1,8 +1,8 @@
 ﻿using eShop.Application.Profiles;
 using eShop.Domain.Abstractions;
 using eShop.Domain.Exceptions;
-using eShop.Infrastructure;
 using eShop.Infrastructure.BackgroundJobs;
+using eShop.Infrastructure.Database;
 using eShop.Infrastructure.Interceptors;
 using eShop.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,7 +18,7 @@ public class InfrastructureServiceInstaller : IServiceInstaller
         services.AddScoped<ConvertFromDomainEventToOutboxMessageInterceptor>();
 
         if (!envName.Equals("Test"))
-            AddDbContext(services);
+            AddDbContext(services, configuration);
 
         services.AddScoped<IProductRepository, ProductRepository>();
 
@@ -50,7 +50,7 @@ public class InfrastructureServiceInstaller : IServiceInstaller
         }
     }
 
-    private static void AddDbContext(IServiceCollection services)
+    private static void AddDbContext(IServiceCollection services, IConfiguration configuration)
     {
         string? dbHost = Environment.GetEnvironmentVariable("DB_HOST");
         string? dbPort = Environment.GetEnvironmentVariable("DB_PORT");
@@ -66,9 +66,16 @@ public class InfrastructureServiceInstaller : IServiceInstaller
         }
 
         //// For when adding migration
-        // string connectionString = $"Server=localhost;Port=18001;Database=eshop;Uid=root;Pwd=mysql_pa55w0rd!";
+        // string connectionString = $"Server=localhost;Port=18001;Database=eshop;Uid=root;Pwd=P@55w0rd!";
 
         string connectionString = $"Server={dbHost};Port={dbPort};Database={dbName};Uid=root;Pwd={dbPassword}";
+
+        // Binding configurations
+        var configurationRoot = (IConfigurationRoot)configuration;
+        configurationRoot.GetSection("ConnectionStrings")["Default"] = connectionString;
+        configurationRoot.Reload();
+
+        services.Configure<MyDbConnectionOptions>(configuration.GetSection("ConnectionStrings"));
 
         services.AddDbContext<AppDbContext>((sp, opt) =>
         {

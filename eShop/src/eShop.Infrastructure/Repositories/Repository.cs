@@ -1,6 +1,10 @@
 ﻿using eShop.Domain.Abstractions;
 using eShop.Domain.Primitives;
-using System.Data.Entity;
+using eShop.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace eShop.Infrastructure.Repositories;
 
@@ -9,18 +13,30 @@ internal abstract class Repository<TEntity> : IRepository<TEntity>
 {
     protected readonly AppDbContext DbContext;
 
-    protected Repository(AppDbContext dbContext) => DbContext = dbContext;
+    protected Repository(
+        AppDbContext dbContext)
+    {
+        DbContext = dbContext;
+    }
 
     public virtual async Task AddAsync(TEntity entity)
     {
-        await DbContext.Set<TEntity>().AddAsync(entity);
-    }
+        using var transaction = DbContext.Database.BeginTransaction();
+        const string transactionName = $"BeforeAdding{nameof(TEntity)}";
 
-    public virtual async Task<TEntity?> GetByIdAsync(Guid id)
-    {
-        return await DbContext.Set<TEntity>()
-            .FirstOrDefaultAsync(entity => entity.Id == id)
-            ?? null;
+        try
+        {
+            transaction.CreateSavepoint(transactionName);
+
+            await DbContext.Set<TEntity>().AddAsync(entity);
+            await SaveChangesAsync();
+
+            transaction.Commit();
+        }
+        catch (Exception)
+        {
+            transaction.RollbackToSavepoint(transactionName);
+        }
     }
 
     public async Task SaveChangesAsync()

@@ -1,5 +1,6 @@
 ﻿using eShop.Domain.Abstractions;
 using eShop.Domain.Entities;
+using eShop.Infrastructure.Database;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 

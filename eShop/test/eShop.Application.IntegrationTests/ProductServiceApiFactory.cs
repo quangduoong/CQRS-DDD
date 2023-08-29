@@ -1,5 +1,5 @@
 ﻿using DotNet.Testcontainers.Builders;
-using eShop.Infrastructure;
+using eShop.Infrastructure.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;

@@ -6,6 +6,7 @@ using eShop.Domain.Entities;
 using eShop.Domain.Errors;
 using eShop.Domain.Shared;
 using MediatR;
+using Microsoft.Extensions.Options;
 
 namespace eShop.Application.Products.Handlers;
 

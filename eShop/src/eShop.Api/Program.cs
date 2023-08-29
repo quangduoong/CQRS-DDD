@@ -1,6 +1,6 @@
 using eShop.Api.Configurations;
 using eShop.Api.Middleware;
-using eShop.Infrastructure;
+using eShop.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

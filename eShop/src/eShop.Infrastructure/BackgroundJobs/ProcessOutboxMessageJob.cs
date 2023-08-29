@@ -1,4 +1,5 @@
 ﻿using eShop.Domain.Primitives;
+using eShop.Infrastructure.Database;
 using eShop.Infrastructure.Outbox;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

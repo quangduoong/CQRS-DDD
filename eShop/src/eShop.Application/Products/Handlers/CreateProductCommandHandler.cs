@@ -23,7 +23,6 @@ internal sealed class CreateProductCommandHandler : IRequestHandler<CreateProduc
     {
         Product product = _mapper.Map<Product>(request.Product);
         await _repository.AddAsync(product);
-        await _repository.SaveChangesAsync();
 
         return Result.Success(_mapper.Map<CreateProductResponse>(product));
     }

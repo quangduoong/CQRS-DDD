@@ -3,7 +3,7 @@ using eShop.Domain.Shared;
 using eShop.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 
-namespace eShop.Infrastructure;
+namespace eShop.Infrastructure.Database;
 
 public static class MyEntityConfigs
 {
