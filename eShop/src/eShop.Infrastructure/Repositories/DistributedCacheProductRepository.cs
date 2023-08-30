@@ -54,6 +54,4 @@ public class DistributedCacheProductRepository : IProductRepository
 
         return foundProduct;
     }
-
-    public async Task SaveChangesAsync() => await _decorator.SaveChangesAsync();
 }

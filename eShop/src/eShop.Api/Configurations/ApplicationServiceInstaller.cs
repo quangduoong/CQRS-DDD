@@ -16,14 +16,15 @@ public class ApplicationServiceInstaller : IServiceInstaller
             typeof(CreateProductCommand).GetTypeInfo().Assembly,
             typeof(GetProductByIdQuery).GetTypeInfo().Assembly
         };
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(actionAssemblies));
 
-        // Validation 
         Assembly[] validationAssemblies = {
             typeof(CreateProductCommandValidator).GetTypeInfo().Assembly
         };
         services.AddValidatorsFromAssemblies(validationAssemblies);
-        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(actionAssemblies))
+            .AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>))
+            .AddScoped(typeof(IPipelineBehavior<,>), typeof(DbTransactionBehavior<,>));
     }
 }
 

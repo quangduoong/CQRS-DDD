@@ -17,47 +17,67 @@ internal sealed class ProductRepository : Repository<Product>, IProductRepositor
         _dbConnection = DbContext.Connection;
     }
 
+    //public override async Task AddAsync(Product product)
+    //{
+    //    _dbConnection.Open();
+    //    using var transaction = _dbConnection.BeginTransaction();
+
+    //    try
+    //    {
+    //        DbContext.Database.UseTransaction(transaction as DbTransaction);
+
+    //        string sqlQuery = @"
+    //                INSERT INTO products (id, name, sku, price_amount, price_currency_id)
+    //                VALUES (@Id, @Name, @Sku, @PriceAmount, @PriceCurrencyId);
+    //            ";
+
+    //        await _dbConnection.ExecuteAsync(
+    //            sqlQuery,
+    //            new
+    //            {
+    //                product.Id,
+    //                product.Name,
+    //                product.Sku,
+    //                product.PriceAmount,
+    //                product.PriceCurrencyId,
+    //            },
+    //            transaction);
+
+    //        transaction.Commit();
+
+    //        DbContext.Products.Attach(product);
+    //    }
+    //    catch (Exception)
+    //    {
+    //        transaction.Rollback();
+    //        throw;
+    //    }
+    //    finally
+    //    {
+    //        transaction?.Dispose();
+    //        _dbConnection.Close();
+    //    }
+    //}
+
     public override async Task AddAsync(Product product)
     {
-        _dbConnection.Open();
-        using var transaction = _dbConnection.BeginTransaction();
-
-        try
-        {
-            DbContext.Database.UseTransaction(transaction as DbTransaction);
-
-            string sqlQuery = @"
+        string sqlQuery = @"
                     INSERT INTO products (id, name, sku, price_amount, price_currency_id)
                     VALUES (@Id, @Name, @Sku, @PriceAmount, @PriceCurrencyId);
                 ";
 
-            await _dbConnection.ExecuteAsync(
-                sqlQuery,
-                new
-                {
-                    product.Id,
-                    product.Name,
-                    product.Sku,
-                    product.PriceAmount,
-                    product.PriceCurrencyId,
-                },
-                transaction);
+        await _dbConnection.ExecuteAsync(
+            sqlQuery,
+            new
+            {
+                product.Id,
+                product.Name,
+                product.Sku,
+                product.PriceAmount,
+                product.PriceCurrencyId,
+            });
 
-            DbContext.Products.Attach(product);
-            await SaveChangesAsync();
-
-            transaction.Commit();
-        }
-        catch (Exception)
-        {
-            transaction.Rollback();
-            throw;
-        }
-        finally
-        {
-            transaction?.Dispose();
-            _dbConnection.Close();
-        }
+        DbContext.Products.Attach(product);
     }
 
     public async Task<Product?> GetByIdAsync(Guid id)

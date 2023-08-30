@@ -1,4 +1,5 @@
-﻿using eShop.Domain.Entities;
+﻿using eShop.Domain.Abstractions;
+using eShop.Domain.Entities;
 using eShop.Infrastructure.Outbox;
 using Microsoft.EntityFrameworkCore;
 using System.Data;

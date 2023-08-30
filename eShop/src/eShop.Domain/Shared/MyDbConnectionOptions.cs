@@ -1,4 +1,4 @@
-﻿namespace eShop.Infrastructure.Database;
+﻿namespace eShop.Domain.Shared;
 
 public class MyDbConnectionOptions
 {

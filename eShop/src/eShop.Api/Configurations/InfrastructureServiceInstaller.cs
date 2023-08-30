@@ -1,10 +1,11 @@
 ﻿using eShop.Application.Profiles;
 using eShop.Domain.Abstractions;
 using eShop.Domain.Exceptions;
+using eShop.Domain.Shared;
 using eShop.Infrastructure.BackgroundJobs;
 using eShop.Infrastructure.Database;
-using eShop.Infrastructure.Interceptors;
 using eShop.Infrastructure.Repositories;
+using eShop.Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
 using System.Reflection;
@@ -15,12 +16,11 @@ public class InfrastructureServiceInstaller : IServiceInstaller
 {
     public void Install(IServiceCollection services, IConfiguration configuration, string envName)
     {
-        services.AddScoped<ConvertFromDomainEventToOutboxMessageInterceptor>();
-
         if (!envName.Equals("Test"))
             AddDbContext(services, configuration);
 
         services.AddScoped<IProductRepository, ProductRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         if (!envName.Equals("Test"))
             services.Decorate<IProductRepository, DistributedCacheProductRepository>();
@@ -77,13 +77,9 @@ public class InfrastructureServiceInstaller : IServiceInstaller
 
         services.Configure<MyDbConnectionOptions>(configuration.GetSection("ConnectionStrings"));
 
-        services.AddDbContext<AppDbContext>((sp, opt) =>
-        {
-            var interceptor = sp.GetService<ConvertFromDomainEventToOutboxMessageInterceptor>();
-
+        services.AddDbContext<AppDbContext>(opt =>
             opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString))
-                .AddInterceptors(interceptor!);
-        });
+        );
     }
 }
 
